@@ -1,0 +1,24 @@
+#navbar-item{
+    padding-top:10px;
+    padding-bottom:10px;
+    font-family:'Barlow', sans-serif;
+    font-size:20px;
+}
+#shadow{
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.15);
+}
+#navbar-item-1{
+    font-family:'Barlow', sans-serif;
+    font-size:20px;
+}
+.nav-item {
+    padding-left : 10px;
+    padding-right : 10px
+}
+#avatar {
+    height:40px; 
+    position: absolute; 
+    left : -20%; 
+    top: 50%; 
+    transform: translateY(-50%)
+}
