@@ -7,6 +7,12 @@
 #shadow{
     box-shadow: 0 0 10px 0 rgba(0,0,0,.15);
 }
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
 #navbar-item-1{
     font-family:'Barlow', sans-serif;
     font-size:20px;
@@ -21,4 +27,29 @@
     left : -20%; 
     top: 50%; 
     transform: translateY(-50%)
+}
+.acc-settings{
+    text-align:center;
+    color:#0a0a4d;
+    font-size:40px;
+    font-weight:bolder;
+    font-family:'Barlow', sans-serif;
+}
+.del-acc, .disable-acc, .req-pw-change{
+    width:80%;
+    padding: 5px 20px;
+    margin-top:50px;
+    color:black;
+    display: inline-block;
+    font-size:20px;
+    height:55px;
+    background-color:white;
+    text-decoration:none;
+    border-radius:40px;
+    border:2px solid lightblue;
+    box-sizing: border-box;
+    cursor:pointer;
+}
+.del-acc:hover, .disable-acc:hover, .req-pw-change:hover{
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.2);
 }
