@@ -19,3 +19,20 @@ button:focus {
     box-sizing: border-box;
     cursor:pointer;
 }
+.submit-button{
+    width:auto;
+    color:black;
+    padding:5px 50px;
+    margin-top:50px;
+    border-radius:40px;
+    border:2px solid;
+    background-color: white;
+    font-size:20px;
+    cursor: pointer
+}
+.submit-button:hover{
+    color:white;
+    border:2px solid #0a0a4d;
+    background-color: #0a0a4d;
+    transition: 0.5s;
+}
