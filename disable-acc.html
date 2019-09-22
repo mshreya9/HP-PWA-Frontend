@@ -1,5 +1,4 @@
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,19 +6,19 @@
     <link href="https://fonts.googleapis.com/css?family=Barlow&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Disable Account</title>
+    <link rel="stylesheet" href="./styles/add-user.css">
+    <title>Add User</title>
 </head>
-
 <body>
     <div class="container-fluid">
         <div class="row" style="text-align:center;">
             <div class="col-12 col-lg-4"></div>
-            <div class="col-12 col-lg-4">
+            <div class="col-12 col-lg-4" style="text-align: center">
                 <div>
                     <img src="./assets/back.svg" style="height:25px; position: absolute; top : 5%; left : 5%">
                 </div>
                 <div style="margin-top : 15px">
-                    <h2>Disable Access</h2>
+                    <h2>Disable domain</h2>
                 </div>
                 <div style="margin-top:100px;">
                     <input id="email" placeholder="Email" type="email">
@@ -27,14 +26,19 @@
                 <div>
                     <input id="domain" placeholder="Domain" type="text">
                 </div>
+                <div style="padding-left : 50px; padding-right : 50px; margin-top : 100px; margin-bottom : 50px">
+                <div id="response" style="border : 2px solid red; height : auto;"></div>
+                </div>
                 <div>
+                        <img id="loader" src="assets/test.svg"
+                        style="width:50px; height:auto; position:absolute; left:50%; bottom:0%; transform:translateX(-50%); display:none;">
+
                     <input class="submit-button" type="submit" value="Signup">
                 </div>
             </div>
             <div class="col-12 col-lg-4"></div>
         </div>
     </div>
-
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -48,10 +52,59 @@
 
     <script>
 
-        window.onload = function () {
-            document.getElementById
+         window.onload = function () {
+            document.getElementsByClassName("submit-button")[0].addEventListener('click', function (event) {
+
+// pick values
+let username = document.getElementById("email");
+let password = document.getElementById("domain");
+
+// validation
+let status = [];
+
+if (username.value.trim().length == 0) {
+    status.push("false");
+    username.style.borderColor = "red";
+    username.placeholder = "Please enter valid input"
+
+} else {
+    username.style.borderColor = "green";
+    status.push("true");
+}
+
+if (password.value.trim().length <= 6) {
+    status.push("false");
+    password.style.borderColor = "red";
+    password.placeholder = "Please enter valid input"
+} else {
+    password.style.borderColor = "green";
+    status.push("true");
+}
+
+if (status.includes("false")) {
+    return false
+}
+else {
+
+    document.getElementById("loader").style.display = "block";
+    document.getElementsByClassName("submit-button")[0].style.value = "";
+    document.getElementsByClassName("submit-button")[0].style.backgroundColor = "#0a0a4d";
+    document.getElementsByClassName("submit-button")[0].style.color = "#0a0a4d";
+    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+    xmlhttp.open("POST", "https://hp-pwa.herokuapp.com/admin/disabledomain");
+    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xmlhttp.setRequestHeader("Authorization", localStorage.getItem("token"));
+
+    xmlhttp.send(JSON.stringify({ "domain": password.value, "email": username.value }));
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4) {
+            document.getElementById('response').innerHTML =  JSON.parse(xmlhttp.responseText).message;
         }
+    };
+
+}
+})
+         }
     </script>
 </body>
-
 </html>
